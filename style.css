@@ -345,15 +345,16 @@ body {
     body {
         overflow-y: auto;
         overflow-x: hidden;
+        min-height: 100vh;
     }
 
     .container {
         flex-direction: column;
-        padding: 4rem 1.5rem 3rem;
+        padding: 3rem 1.5rem;
         align-items: center;
         text-align: center;
         gap: 2.5rem;
-        min-height: 100vh;
+        max-width: 100%;
         justify-content: center;
     }
 
@@ -364,11 +365,14 @@ body {
     .right-col {
         flex: unset;
         width: 100%;
+        max-width: 400px;
         align-items: center;
     }
 
     .socials {
         justify-content: center;
+        gap: 0.4rem;
+        margin-top: 1rem;
     }
 
     .name {
@@ -377,11 +381,6 @@ body {
 
     .tagline {
         font-size: 0.85rem;
-    }
-
-    .socials {
-        gap: 0.4rem;
-        margin-top: 1rem;
     }
 
     .social-link {
