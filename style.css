@@ -1,0 +1,432 @@
+/* ============================================
+   Hayden D'Errico — Temporary Landing Page
+   ============================================ */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --peach-light: #fde8d8;
+    --peach: #f8c4a4;
+    --peach-medium: #f5a97a;
+    --peach-deep: #f28c5a;
+    --pink: #f4b8c8;
+    --pink-deep: #e899b0;
+    --white: #ffffff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #8888a8;
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--white);
+}
+
+/* ============================================
+   Animated Gradient Background
+   ============================================ */
+
+.gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(135deg,
+            var(--pink) 0%,
+            var(--peach) 30%,
+            var(--peach-light) 55%,
+            var(--white) 80%,
+            var(--white) 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ============================================
+   Cursor Glow
+   ============================================ */
+
+.cursor-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+            rgba(248, 196, 164, 0.25) 0%,
+            rgba(244, 184, 200, 0.12) 40%,
+            transparent 70%);
+    filter: blur(30px);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    will-change: transform;
+}
+
+.cursor-glow.active {
+    opacity: 1;
+}
+
+/* ============================================
+   Particle Canvas
+   ============================================ */
+
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ============================================
+   Container & Layout — Two Column
+   ============================================ */
+
+.container {
+    position: relative;
+    z-index: 3;
+    padding: 3rem 5rem;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.left-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    flex: 1;
+}
+
+.right-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    flex: 0 0 320px;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+.name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.05;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.tagline {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+}
+
+/* ============================================
+   Social Links
+   ============================================ */
+
+.socials {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border-radius: 100px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition:
+        transform 0.3s var(--transition-smooth),
+        box-shadow 0.3s var(--transition-smooth),
+        background 0.3s var(--transition-smooth),
+        border-color 0.3s var(--transition-smooth),
+        color 0.3s var(--transition-smooth);
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(242, 140, 90, 0.25);
+    color: var(--peach-deep);
+}
+
+.social-link:active {
+    transform: translateY(0);
+}
+
+.social-link svg {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Projects Section (Right Column)
+   ============================================ */
+
+.section-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.project-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition:
+        transform 0.3s var(--transition-smooth),
+        box-shadow 0.3s var(--transition-smooth),
+        background 0.3s var(--transition-smooth),
+        border-color 0.3s var(--transition-smooth);
+}
+
+.project-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: rgba(244, 184, 200, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.project-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 10px 30px rgba(244, 184, 200, 0.18),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(244, 184, 200, 0.3);
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.project-name {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.project-desc {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+.project-arrow {
+    flex-shrink: 0;
+    opacity: 0.4;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover .project-arrow {
+    opacity: 0.8;
+    transform: translate(2px, -2px);
+}
+
+/* ============================================
+   Entrance Animations
+   ============================================ */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s var(--transition-smooth) forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.35s;
+}
+
+.delay-3 {
+    animation-delay: 0.55s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 4rem 1.5rem 3rem;
+        align-items: center;
+        text-align: center;
+        gap: 2.5rem;
+        min-height: 100vh;
+        justify-content: center;
+    }
+
+    .left-col {
+        align-items: center;
+    }
+
+    .right-col {
+        flex: unset;
+        width: 100%;
+        align-items: center;
+    }
+
+    .socials {
+        justify-content: center;
+    }
+
+    .name {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+
+    .tagline {
+        font-size: 0.85rem;
+    }
+
+    .socials {
+        gap: 0.4rem;
+        margin-top: 1rem;
+    }
+
+    .social-link {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.78rem;
+    }
+
+    .section-label {
+        font-size: 0.8rem;
+    }
+
+    .project-card {
+        padding: 0.9rem 1rem;
+    }
+
+    .project-name {
+        font-size: 0.92rem;
+    }
+
+    .project-desc {
+        font-size: 0.74rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 3rem 1.25rem 2rem;
+    }
+
+    .social-link span {
+        display: none;
+    }
+
+    .social-link {
+        padding: 0.6rem;
+        border-radius: 50%;
+    }
+}
+
+@media (hover: none) {
+    .cursor-glow {
+        display: none;
+    }
+
+    #particleCanvas {
+        display: none;
+    }
+}
